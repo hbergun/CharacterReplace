@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace CharecterReplace
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
+        string FilePath;
+        string FileName;
+        List<string> oldValues = new List<string>();
+        List<string> newValues = new List<string>();
 
         private void btnFindPath_Click(object sender, EventArgs e)
         {
@@ -28,13 +32,29 @@ namespace CharecterReplace
 
             if (ofdDosyaAc.ShowDialog() == DialogResult.OK)
             {
-                string FilePath = ofdDosyaAc.FileName;
-                MessageBox.Show(FilePath);
-                string FileName = ofdDosyaAc.SafeFileName;
-                MessageBox.Show(FileName);
+                 FilePath = ofdDosyaAc.FileName;
+                 FileName = ofdDosyaAc.SafeFileName;
+                 MessageBox.Show("Dosya Seçildi.");
             }
+        }
 
+        private void btnAddValue_Click(object sender, EventArgs e)
+        {
+            lbxOldValue.Items.Add(txtOldValue.Text);
+            oldValues.Add(txtOldValue.Text);
+            lbxNewValue.Items.Add(txtNewValue.Text);
+            newValues.Add(txtNewValue.Text);
+            txtNewValue.Clear();
+            txtOldValue.Clear();
+          
+        }
 
+        private void btnReplace_Click(object sender, EventArgs e)
+        {
+            FileOperation.ReadAndReplace(FilePath,oldValues,newValues);
+            MessageBox.Show("İşlem Başarı İle Gerçekleştirildi!");
+            lbxNewValue.Items.Clear();
+            lbxOldValue.Items.Clear();
         }
     }
 }

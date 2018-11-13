@@ -9,13 +9,13 @@ namespace CharecterReplace
 {
     public class FileOperation //Sınıf İçindeki Tüm Elemanları Static Yapmak İstersen Etiketle
     {
-        public static string ReadFromFile(string _path,char[] oldValue,char[] newValue)
+        public static string ReadAndReplace(string _path,List<string> oldValue,List<string> newValue)
         {
             string path = _path;
             // string text = File.ReadAllText(path).Replace(oldValue, newValue);
             string text = File.ReadAllText(path);
-            for (int i = 0; i < oldValue.Length; i++) //Or New Value it doesnt matter
-                text.Replace(oldValue[i],newValue[i]);
+            for (int i = 0; i < oldValue.Count; i++)  //Or New Value it doesnt matter
+                text=text.Replace(oldValue[i], newValue[i]); //Replace Sonrası Mutlaka Tekrar Atama Yapılacak
             File.WriteAllText(path, text);
             return text;
         }
