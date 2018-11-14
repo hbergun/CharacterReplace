@@ -34,27 +34,36 @@ namespace CharecterReplace
             {
                  FilePath = ofdDosyaAc.FileName;
                  FileName = ofdDosyaAc.SafeFileName;
-                 MessageBox.Show("Dosya Seçildi.");
+                 MessageBox.Show(FileName+" İsimli Dosya Başarı İle Seçildi.","Başarılı!");
             }
         }
 
         private void btnAddValue_Click(object sender, EventArgs e)
         {
-            lbxOldValue.Items.Add(txtOldValue.Text);
-            oldValues.Add(txtOldValue.Text);
-            lbxNewValue.Items.Add(txtNewValue.Text);
-            newValues.Add(txtNewValue.Text);
-            txtNewValue.Clear();
-            txtOldValue.Clear();
-          
+            if (txtNewValue.Text != string.Empty && txtOldValue.Text != string.Empty)
+            {
+                lbxOldValue.Items.Add(txtOldValue.Text);
+                oldValues.Add(txtOldValue.Text);
+                lbxNewValue.Items.Add(txtNewValue.Text);
+                newValues.Add(txtNewValue.Text);
+                txtNewValue.Clear();
+                txtOldValue.Clear();
+            }
+            else
+                MessageBox.Show("Lütfen Eski Ve Yeni Değer Alanlarını Boş Bırakmayınız!","Dikkat!");
         }
 
         private void btnReplace_Click(object sender, EventArgs e)
         {
+            if (FilePath != null)
+            {
             FileOperation.ReadAndReplace(FilePath,oldValues,newValues);
             MessageBox.Show("İşlem Başarı İle Gerçekleştirildi!");
             lbxNewValue.Items.Clear();
             lbxOldValue.Items.Clear();
+            }
+            else
+                MessageBox.Show("Lütfen Hedef Dosyayı Doğru Seçtiğinizden Emin Olun!");
         }
     }
 }

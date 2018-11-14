@@ -16,7 +16,7 @@ namespace CharecterReplace
             string text = File.ReadAllText(path,Encoding.UTF8); //Encoding Set UTF-8
             for (int i = 0; i < oldValue.Count; i++)  //Or New Value it doesnt matter
                 text=text.Replace(oldValue[i], newValue[i]); //Replace Sonrası Mutlaka Tekrar Atama Yapılacak
-            File.WriteAllText(path, text);
+            File.WriteAllText(path, text,Encoding.UTF8);
             return text;
         }
     }
