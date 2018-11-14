@@ -57,7 +57,7 @@ namespace CharecterReplace
         {
             if (FilePath != null)
             {
-            FileOperation.ReadAndReplace(FilePath,oldValues,newValues);
+            FileOperation.ReadAndReplace(FilePath,FileName,oldValues,newValues);
             MessageBox.Show("İşlem Başarı İle Gerçekleştirildi!");
             lbxNewValue.Items.Clear();
             lbxOldValue.Items.Clear();

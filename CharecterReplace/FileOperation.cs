@@ -9,14 +9,22 @@ namespace CharecterReplace
 {
     public class FileOperation //Sınıf İçindeki Tüm Elemanları Static Yapmak İstersen Etiketle
     {
-        public static string ReadAndReplace(string _path,List<string> oldValue,List<string> newValue)
+        public static string ReadAndReplace(string _path,string FileName,List<string> oldValue,List<string> newValue)
         {
             string path = _path;
             // string text = File.ReadAllText(path).Replace(oldValue, newValue);
-            string text = File.ReadAllText(path,Encoding.UTF8); //Encoding Set UTF-8
+            string text = File.ReadAllText(path,Encoding.Default); //Encoding Set UTF-8
             for (int i = 0; i < oldValue.Count; i++)  //Or New Value it doesnt matter
                 text=text.Replace(oldValue[i], newValue[i]); //Replace Sonrası Mutlaka Tekrar Atama Yapılacak
-            File.WriteAllText(path, text,Encoding.UTF8);
+            var newPath = string.Format($"C:\\Users\\HasanBerkErgun\\Desktop\\{FileName.Substring(0,FileName.Length-4)}Replace.txt");
+            if (!File.Exists(newPath))
+            {
+                File.Create(newPath).Close();
+                using (StreamWriter streamWriter = File.CreateText(newPath))
+                    streamWriter.WriteLine(text);
+
+            }
+            //File.WriteAllText(path,text,Encoding.GetEncoding("iso-8859-9"));
             return text;
         }
     }
